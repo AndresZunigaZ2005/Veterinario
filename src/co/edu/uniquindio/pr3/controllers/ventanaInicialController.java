@@ -29,11 +29,8 @@ public class ventanaInicialController {
 	private Stage stage;
 
     @FXML
-    /*
-     * Papu
-     */
     void registrarCliente(ActionEvent event) {
-    	System.out.println("Hola mundo");
+    	System.out.println("Hola papu");
     }
 
 	public void setStage(Stage primaryStage) {
