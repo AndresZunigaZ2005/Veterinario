@@ -1,6 +1,7 @@
 package co.edu.uniquindio.pr3.model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Cliente extends Persona{
 
@@ -70,5 +71,21 @@ public class Cliente extends Persona{
 		return "Cliente [nombre: "+getNombre()+", telefono: "+getTelefono()+", corrreo: "+getCorreo()+", cedula=" + cedula + ", direccion=" + direccion + ", listaMascotas=" + listaMascotas + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(cedula);
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		return Objects.equals(cedula, other.cedula);
+	}
+	
 }
