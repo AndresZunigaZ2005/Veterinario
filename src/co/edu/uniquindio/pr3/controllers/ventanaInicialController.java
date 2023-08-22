@@ -30,7 +30,7 @@ public class ventanaInicialController {
 
     @FXML
     /*
-     * hola
+     * adios
      */
     void registrarCliente(ActionEvent event) {
     	System.out.println("Hola papu");
