@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collector;
 
 import co.edu.uniquindio.pr3.exceptions.ClienteException;
+import co.edu.uniquindio.pr3.exceptions.MascotaException;
 import co.edu.uniquindio.pr3.exceptions.RegistroVeterinarioException;
 
 public class ClinicaVeterinaria {
@@ -75,14 +76,34 @@ public class ClinicaVeterinaria {
 	}
 	
 	/**
-	 * Metodos CRUD mascotas
+	 * Metodos CRUD mascotas /////////////////////////////////////////////////////
 	 */
-	public void crearMascota(Mascota nuevaMascota, String cedula) {
-		//listaClientes
+	public void aniadirMascotaCliente(String nombre, int edad, String raza, Sexo sexo, 
+			Tipo tipo, String cedula) throws MascotaException{
+		Mascota nuevaMascota = new Mascota(nombre, edad, raza, sexo, tipo);
+		Cliente cliente = obtenerCliente(cedula);
+		if(cliente.buscarMascotaRepetida(nuevaMascota)) {
+			throw new MascotaException("La mascota ya esta añadida en el cliente");
+		}
+		cliente.getListaMascotas().add(nuevaMascota);
 	}
 	
+	public Mascota obtenerMascota(String identificacion, String cedula) {
+		Cliente cliente = obtenerCliente(cedula);
+		return cliente.getListaMascotas().stream()
+				.filter(x ->x.getIdentificacion().equals(identificacion))
+				.findFirst()
+				.orElse(null);
+	}
+	
+	public void actualizarMascota(String identificacion, String cedula,int edad) {
+		Mascota mascota = obtenerMascota(identificacion, cedula);
+		mascota.setEdad(edad);
+	}
+	
+	
 	/**
-	 * Metodos CRUD Clientes
+	 * Metodos CRUD Clientes  //////////////////////////////////////////////////////
 	 */
 	
 	public void crearCliente(String nombre, String telefono, String correo, String cedula, String direccion) throws ClienteException{
@@ -117,7 +138,7 @@ public class ClinicaVeterinaria {
 	}
 	
 	/**
-	 * Metodos CRUD registroVeterinario
+	 * Metodos CRUD registroVeterinario   ///////////////////////////////////////////////
 	 */
 	public void aniadirRegistroVeterinario(RegistroVeterinario nuevoRegistroVeterinario) throws RegistroVeterinarioException{
 		if(verificarRegistroVeterinario(nuevoRegistroVeterinario)) {
@@ -157,5 +178,14 @@ public class ClinicaVeterinaria {
     
     public void actualizarRegistroVeterinario(RegistroVeterinario registroVeterinario,Estado estado) {
     	registroVeterinario.setEstado(estado);
+    }
+    
+    /**
+     * Metodos CRUD factura
+     */
+    public void crearFactura(double precio, LocalDate fechaFactura, String atencion, 
+    		String observaciones,String cedula, RegistroVeterinario registroVeterinario) {
+    	Cliente cliente = obtenerCliente(cedula);
+		registroVeterinario.crearFactura(precio, fechaFactura, atencion, observaciones, cliente);		
     }
 }

@@ -97,5 +97,11 @@ public class RegistroVeterinario {
 				+ mascota + "]";
 	}
 
-
+	//////////////////////////////////////////////////////////////////////////////////
+	public void crearFactura(double precio, LocalDate fechaFactura, String atencion, String observaciones, Cliente cliente) {
+		if(getEstado() == Estado.ATENDIDA) {
+			Factura newFactura = new Factura(precio, fechaFactura, atencion, observaciones, cliente);
+			setFactura(newFactura);
+		}
+	}
 }

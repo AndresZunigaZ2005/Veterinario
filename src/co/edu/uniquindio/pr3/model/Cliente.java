@@ -88,4 +88,8 @@ public class Cliente extends Persona{
 		return Objects.equals(cedula, other.cedula);
 	}
 	
+	public boolean buscarMascotaRepetida(Mascota mascota) {
+		return listaMascotas.stream()
+				.anyMatch(x -> x.getIdentificacion().equals(mascota.getIdentificacion()));
+	}
 }
