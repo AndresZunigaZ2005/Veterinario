@@ -1,9 +1,11 @@
 package co.edu.uniquindio.pr3.model;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class RegistroVeterinario {
 
+    private UUID idCita;
 	private LocalDate fecha;
 	private String diagnostico;
 	private String tratamiento;
@@ -25,6 +27,7 @@ public class RegistroVeterinario {
 	public RegistroVeterinario(LocalDate fecha, String diagnostico, String tratamiento, Estado estado,
 			Veterinario veterinario, Factura factura, Mascota mascota) {
 		super();
+		this.idCita = UUID.randomUUID();
 		this.fecha = fecha;
 		this.diagnostico = diagnostico;
 		this.tratamiento = tratamiento;
@@ -32,6 +35,14 @@ public class RegistroVeterinario {
 		this.veterinario = veterinario;
 		this.factura = factura;
 		this.mascota = mascota;
+	}
+	
+	public UUID getIdCita() {
+		return idCita;
+	}
+
+	public void setIdCita(UUID idCita) {
+		this.idCita = idCita;
 	}
 
 	public LocalDate getFecha() {

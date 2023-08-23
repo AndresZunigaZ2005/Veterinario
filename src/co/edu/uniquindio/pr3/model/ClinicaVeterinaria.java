@@ -125,8 +125,9 @@ public class ClinicaVeterinaria {
 	
 	public boolean verificarCliente(String cedula) {
 		return listaClientes.stream()
-				.anyMatch(x ->x.getCedula().equals(cedula));
+				.anyMatch(c ->c.getCedula().equals(cedula));
 	}
+	
 	
 	public void actualizarCliente(String nombre, String telefono, String correo, String cedula) {
 		Cliente actualizarCliente = obtenerCliente(cedula);
@@ -140,7 +141,9 @@ public class ClinicaVeterinaria {
 	/**
 	 * Metodos CRUD registroVeterinario   ///////////////////////////////////////////////
 	 */
-	public void aniadirRegistroVeterinario(RegistroVeterinario nuevoRegistroVeterinario) throws RegistroVeterinarioException{
+	public void aniadirRegistroVeterinario(LocalDate fecha, String diagnostico, String tratamiento, Estado estado,
+			Veterinario veterinario, Factura factura, Mascota mascota) throws RegistroVeterinarioException{
+		RegistroVeterinario nuevoRegistroVeterinario = new RegistroVeterinario(fecha, diagnostico, tratamiento, estado, veterinario, factura, mascota);
 		if(verificarRegistroVeterinario(nuevoRegistroVeterinario)) {
 			throw new RegistroVeterinarioException("Error al hacer el registro, este registro ya existe");
 		}
@@ -170,8 +173,8 @@ public class ClinicaVeterinaria {
             // Calcular la diferencia en años entre la fecha actual y la fecha del registro
             long añosDiferencia = fechaRegistro.until(fechaActual).getYears();
 
-            if (añosDiferencia > 2) {
-                iterador.remove(); // Eliminar el registro si tiene más de 2 años de antigüedad
+            if (añosDiferencia > 10) {
+                iterador.remove(); // Eliminar el registro si tiene más de 10 años de antigüedad
             }
         }
     }
