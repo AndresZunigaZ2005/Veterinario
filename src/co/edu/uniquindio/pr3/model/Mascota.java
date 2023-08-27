@@ -1,7 +1,11 @@
 package co.edu.uniquindio.pr3.model;
 
+import java.util.Objects;
+import java.util.UUID;
+
 public class Mascota {
 
+    private UUID identificacion;
 	private String nombre;
 	private int edad;
 	private String raza;
@@ -18,11 +22,20 @@ public class Mascota {
 	 */
 	public Mascota(String nombre, int edad, String raza, Sexo sexo, Tipo tipo) {
 		super();
+		this.identificacion = UUID.randomUUID();
 		this.nombre = nombre;
 		this.edad = edad;
 		this.raza = raza;
 		this.sexo = sexo;
 		this.tipo = tipo;
+	}
+	
+	public String getIdentificacion() {
+		return identificacion.toString();
+	}
+
+	public void setIdentificacion(UUID identificacion) {
+		this.identificacion = identificacion;
 	}
 
 	public String getNombre() {
@@ -71,4 +84,22 @@ public class Mascota {
 				+ "]";
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(identificacion);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Mascota other = (Mascota) obj;
+		return Objects.equals(identificacion, other.identificacion);
+	}
+	
+	
 }

@@ -25,16 +25,20 @@ public class ventanaInicialController {
 
     @FXML
     private TextField txtFieldTelefono;
-
-	private Stage stage;
+    
+    private Stage stage;
 
     @FXML
     void registrarCliente(ActionEvent event) {
-    	System.out.println("Hola papu");
+
     }
 
 	public void setStage(Stage primaryStage) {
-		this.stage = primaryStage;
+		// TODO Auto-generated method stub
+		
 	}
+    
+    
 }
+
 
