@@ -29,5 +29,6 @@ public class ModelFactoryController {
 	private void inicializarDatos() {
 		clinicaVeterinaria = new ClinicaVeterinaria("Patitas Peluda");
 		Veterinario vet1 = new Veterinario("Luis", "32677297", "luisc.calderonc@uqvirtual.edu.co","vet1");
+		Veterinario vet2 = new Veterinario("Pacho", "solo las bandidas", "andrese.perezm@uqvirtual.edu.co", "vet2");
 	}
 }
