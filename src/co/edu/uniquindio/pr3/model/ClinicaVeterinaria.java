@@ -1,6 +1,7 @@
 package co.edu.uniquindio.pr3.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -20,6 +21,10 @@ public class ClinicaVeterinaria {
 	
 	public ClinicaVeterinaria(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	public ClinicaVeterinaria() {
+		// TODO Auto-generated constructor stub
 	}
 	
 	public ClinicaVeterinaria(String nombre, Veterinario[] listaVeterinarios, List<Cliente> listaClientes,
@@ -141,7 +146,7 @@ public class ClinicaVeterinaria {
 	/**
 	 * Metodos CRUD registroVeterinario   ///////////////////////////////////////////////
 	 */
-	public void aniadirRegistroVeterinario(LocalDate fecha, String diagnostico, String tratamiento, Estado estado,
+	public void aniadirRegistroVeterinario(LocalDateTime fecha, String diagnostico, String tratamiento, Estado estado,
 			Veterinario veterinario, Factura factura, Mascota mascota) throws RegistroVeterinarioException{
 		RegistroVeterinario nuevoRegistroVeterinario = new RegistroVeterinario(fecha, diagnostico, tratamiento, estado, veterinario, factura, mascota);
 		if(verificarRegistroVeterinario(nuevoRegistroVeterinario)) {
@@ -161,24 +166,7 @@ public class ClinicaVeterinaria {
 		return listaRegistroVeterinario.stream()
 				.anyMatch(x -> x.equals(nuevoRegistroVeterinario));
 	}
-	
-    public void eliminarRegistrosAntiguos() {
-        LocalDate fechaActual = LocalDate.now();
-        Iterator<RegistroVeterinario> iterador = listaRegistroVeterinario.iterator();
-
-        while (iterador.hasNext()) {
-            RegistroVeterinario registro = iterador.next();
-            LocalDate fechaRegistro = registro.getFecha(); 
-
-            // Calcular la diferencia en años entre la fecha actual y la fecha del registro
-            long añosDiferencia = fechaRegistro.until(fechaActual).getYears();
-
-            if (añosDiferencia > 10) {
-                iterador.remove(); // Eliminar el registro si tiene más de 10 años de antigüedad
-            }
-        }
-    }
-    
+	   
     public void actualizarRegistroVeterinario(RegistroVeterinario registroVeterinario,Estado estado) {
     	registroVeterinario.setEstado(estado);
     }

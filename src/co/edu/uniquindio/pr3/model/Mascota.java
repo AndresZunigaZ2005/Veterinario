@@ -3,6 +3,8 @@ package co.edu.uniquindio.pr3.model;
 import java.util.Objects;
 import java.util.UUID;
 
+import javafx.scene.image.Image;
+
 public class Mascota {
 
     private UUID identificacion;

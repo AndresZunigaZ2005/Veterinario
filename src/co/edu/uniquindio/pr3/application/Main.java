@@ -1,6 +1,6 @@
 package co.edu.uniquindio.pr3.application;
 
-import co.edu.uniquindio.pr3.controllers.ventanaInicialController;
+import co.edu.uniquindio.pr3.controllers.VentanaMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -20,12 +20,12 @@ public class Main extends Application {
 
 	        // Configurar el ícono de la aplicación
 	        primaryStage.getIcons().add(icon);
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/pr3/views/ventanaInicial.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/pr3/views/ventanaMenu.fxml"));
 			Parent root = loader.load();
 	        Scene scene = new Scene(root);
 	        primaryStage.setScene(scene);
 	        primaryStage.setResizable(false);
-			ventanaInicialController loginController = loader.getController();
+			VentanaMenuController loginController = loader.getController();
 	        loginController.setStage(primaryStage);
 	        primaryStage.show();
 

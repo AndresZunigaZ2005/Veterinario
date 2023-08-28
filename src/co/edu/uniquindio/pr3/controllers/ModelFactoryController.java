@@ -30,5 +30,22 @@ public class ModelFactoryController {
 		clinicaVeterinaria = new ClinicaVeterinaria("Patitas Peluda");
 		Veterinario vet1 = new Veterinario("Luis", "32677297", "luisc.calderonc@uqvirtual.edu.co","vet1");
 		Veterinario vet2 = new Veterinario("Pacho", "solo las bandidas", "andrese.perezm@uqvirtual.edu.co", "vet2");
+		Veterinario vet3 = new Veterinario("ZZ", "3218861990", "andresf.zunigaz@uqvirtual.edu.co", "vet3");
+		Veterinario vet4 = new Veterinario("Esperanza", "teamoEspe", "eespitia@uniquindio.edu.co", "vet4");
+	
+		public void initialize(URL arg0, ResourceBundle arg1) {
+			this.columnaNombreEmpleado.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+			this.columnaCodigoEmpleado.setCellValueFactory(new PropertyValueFactory<>("idEmpleado"));
+			this.columnaIdentificacionEmpleado.setCellValueFactory(new PropertyValueFactory<>("identificacion"));
+
 	}
+
+	public ClinicaVeterinaria getClinicaVeterinaria() {
+		return clinicaVeterinaria;
+	}
+
+	public void setClinicaVeterinaria(ClinicaVeterinaria clinicaVeterinaria) {
+		this.clinicaVeterinaria = clinicaVeterinaria;
+	}
+	
 }
