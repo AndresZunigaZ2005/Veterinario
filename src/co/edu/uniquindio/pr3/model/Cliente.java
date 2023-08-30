@@ -1,5 +1,6 @@
 package co.edu.uniquindio.pr3.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -39,7 +40,7 @@ public class Cliente extends Persona{
 		super(nombre, telefono, correo);
 		this.cedula = cedula;
 		this.direccion = direccion;
-
+		this.listaMascotas = new ArrayList<>();
 	}
 
 	public String getCedula() {
@@ -68,8 +69,10 @@ public class Cliente extends Persona{
 
 	@Override
 	public String toString() {
-		return "Cliente [nombre: "+getNombre()+", telefono: "+getTelefono()+", corrreo: "+getCorreo()+", cedula=" + cedula + ", direccion=" + direccion + ", listaMascotas=" + listaMascotas + "]";
+		return "Cliente [nombre: "+getNombre()+"]";
 	}
+	
+	
 
 	@Override
 	public int hashCode() {

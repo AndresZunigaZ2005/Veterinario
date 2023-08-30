@@ -15,6 +15,29 @@ public class RegistroVeterinario {
 	private Factura factura;
 	private Mascota mascota;
 
+	
+	/**
+	 * 
+	 * @param idCita
+	 * @param fecha
+	 * @param diagnostico
+	 * @param tratamiento
+	 * @param estado
+	 * @param veterinario
+	 * @param mascota
+	 */
+	public RegistroVeterinario(LocalDateTime fecha, String diagnostico, String tratamiento, Estado estado,
+			Veterinario veterinario, Mascota mascota) {
+		super();
+		this.idCita = UUID.randomUUID();
+		this.fecha = fecha;
+		this.diagnostico = diagnostico;
+		this.tratamiento = tratamiento;
+		this.estado = estado;
+		this.veterinario = veterinario;
+		this.mascota = mascota;
+	}
+
 	/**
 	 *
 	 * @param fecha

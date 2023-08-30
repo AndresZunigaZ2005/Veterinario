@@ -11,8 +11,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -143,11 +141,11 @@
                   <ComboBox fx:id="comboBoxSelVet" layoutX="71.0" layoutY="73.0" prefHeight="27.0" prefWidth="177.0" promptText="Seleccione el Veterinario" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
                   <ComboBox fx:id="comboBoxSelMascotaICita" layoutX="79.0" layoutY="246.0" prefHeight="27.0" prefWidth="175.0" promptText="Seleccione la Mascota" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
                   <Label layoutX="110.0" layoutY="220.0" text="Macotas del Dueño" />
-                  <Spinner fx:id="SpinnerHoraCita" layoutX="90.0" layoutY="405.0" prefHeight="25.0" prefWidth="49.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-                  <Spinner fx:id="SpinnerMinutosCita" layoutX="175.0" layoutY="405.0" prefHeight="25.0" prefWidth="49.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                  <Spinner fx:id="SpinnerHoraCita" layoutX="90.0" layoutY="405.0" prefHeight="27.0" prefWidth="59.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                  <Spinner fx:id="SpinnerMinutosCita" layoutX="175.0" layoutY="405.0" prefHeight="27.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
                   <Label layoutX="102.0" layoutY="383.0" text="Hora" />
                   <Label layoutX="180.0" layoutY="383.0" text="Minuto" />
-                  <TextField fx:id="txtFieldCedulaBuscarMascotasCita" layoutX="92.0" layoutY="167.0" promptText="Cédula" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                  <TextField fx:id="txtFieldCedulaBuscarMascotasCita" layoutX="92.0" layoutY="167.0" onAction="#llenarComboMascotasDueño" promptText="Cédula" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
                   <Label layoutX="113.0" layoutY="138.0" text="Cédula del Dueño" />
                   <Label layoutX="131.0" layoutY="47.0" text="Veterinario" />
                   <Button fx:id="btnAgendarCita" layoutX="393.0" layoutY="423.0" mnemonicParsing="false" onAction="#agendarCita" prefHeight="31.0" prefWidth="135.0" style="-fx-background-radius: 60; -fx-background-color: #0598ff;" text="Agendar Cita">
@@ -164,15 +162,6 @@
             <AnchorPane>
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f5f5f5" height="162.0" layoutX="45.0" layoutY="17.0" stroke="BLACK" strokeType="INSIDE" width="608.0" />
-                  <TreeTableView layoutX="45.0" layoutY="189.0" prefHeight="271.0" prefWidth="607.0" style="-fx-border-color: #0598ff; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;">
-                    <columns>
-                      <TreeTableColumn fx:id="columnaCedulaCliente" prefWidth="75.0" text="Cédula" />
-                      <TreeTableColumn fx:id="columnaNombreCliente" prefWidth="111.99996185302734" text="Nombre" />
-                        <TreeTableColumn fx:id="columnaTelefonoCliente" prefWidth="93.33338928222656" text="Telefono" />
-                        <TreeTableColumn fx:id="columnaCorreoCliente" prefWidth="146.0" text="Correo" />
-                        <TreeTableColumn fx:id="columnaDireccionCliente" prefWidth="179.33334350585938" text="Dirección" />
-                    </columns>
-                  </TreeTableView>
                   <Label layoutX="58.0" layoutY="31.0" text="Nombre" />
                   <Label layoutX="57.0" layoutY="87.0" text="Teléfono" />
                   <Label layoutX="386.0" layoutY="31.0" text="Correo" />
@@ -186,6 +175,15 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
+                  <TableView fx:id="tableViewVerClientes" layoutX="44.0" layoutY="212.0" prefHeight="223.0" prefWidth="612.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;">
+                     <columns>
+                        <TableColumn fx:id="columnaCedula" prefWidth="77.33334732055664" text="Cedula" />
+                        <TableColumn fx:id="columnaNombre" prefWidth="110.6666488647461" text="Nombre" />
+                        <TableColumn fx:id="columnaTelefono" prefWidth="118.66670227050781" text="Telefono" />
+                        <TableColumn fx:id="columnaCorreo" prefWidth="131.33331298828125" text="Correo" />
+                        <TableColumn fx:id="columnaDireccion" prefWidth="174.66665649414062" text="Direccion" />
+                     </columns>
+                  </TableView>
                </children>
             </AnchorPane>
       </content>
@@ -194,16 +192,6 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="471.0" prefWidth="682.0">
                <children>
-                  <TreeTableView layoutX="12.0" layoutY="133.0" prefHeight="310.0" prefWidth="651.0" style="-fx-border-color: #0598ff; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;">
-                    <columns>
-                      <TreeTableColumn fx:id="TreeTCIdCita" prefWidth="63.3333158493042" style="-fx-background-color: transparent;" text="ID Cita" />
-                      <TreeTableColumn fx:id="TreeTCIdVet" prefWidth="143.3332748413086" text="Veterinario" />
-                        <TreeTableColumn fx:id="TreeTCIdMascota" prefWidth="145.3333282470703" text="Mascota" />
-                        <TreeTableColumn fx:id="TreeTCIdFecha" prefWidth="130.0" text="Fecha" />
-                        <TreeTableColumn fx:id="TreeTCIdEstado" prefWidth="78.66665649414062" style="-fx-background-color: transparent;" text="Estado" />
-                        <TreeTableColumn fx:id="TreeTCIdFactura" prefWidth="89.33333333333337" style="-fx-background-color: transparent;" text="Factura" />
-                    </columns>
-                  </TreeTableView>
                   <Label layoutX="75.0" layoutY="24.0" text="Seleccione una cita en la tabla de abajo para actualizar el estado">
                      <font>
                         <Font size="18.0" />
@@ -216,6 +204,16 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
+                  <TableView fx:id="tableViewCitas" layoutX="22.0" layoutY="168.0" prefHeight="278.0" prefWidth="643.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;">
+                     <columns>
+                        <TableColumn fx:id="columnIDCita" prefWidth="57.33334732055664" text="ID CIta" />
+                        <TableColumn fx:id="columnVeterinarioCita" prefWidth="141.99999237060547" text="Veterinario" />
+                        <TableColumn fx:id="columnMascotaCita" prefWidth="115.33332824707031" text="Mascota" />
+                        <TableColumn fx:id="columnFechaCita" prefWidth="111.3333740234375" text="Fecha" />
+                        <TableColumn fx:id="columnEstadoCita" prefWidth="113.33328247070312" text="Estado" />
+                        <TableColumn fx:id="columnFactura" prefWidth="103.3333740234375" text="Factura" />
+                     </columns>
+                  </TableView>
                </children>
             </AnchorPane>
         </content>
@@ -234,15 +232,15 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <TreeTableView fx:id="treeTableViewHistorial" layoutX="274.0" layoutY="28.0" prefHeight="205.0" prefWidth="373.0" style="-fx-border-color: #0598ff; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;">
-                     <columns>
-                        <TreeTableColumn fx:id="TreeTCIdFechaHistorial" prefWidth="371.99998982747394" text="Fecha" />
-                     </columns>
-                  </TreeTableView>
                   <TextArea fx:id="txtAreaDiagnosticoHistorial" layoutX="34.0" layoutY="288.0" prefHeight="167.0" prefWidth="278.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
                   <TextArea fx:id="txtAreaTratamientoHistorial" layoutX="361.0" layoutY="288.0" prefHeight="167.0" prefWidth="278.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
                   <Label layoutX="141.0" layoutY="260.0" text="Diagnóstico" />
                   <Label layoutX="468.0" layoutY="260.0" text="Tratamiento" />
+                  <TableView fx:id="tableViewHistorialMascota" layoutX="293.0" layoutY="23.0" prefHeight="223.0" prefWidth="371.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;">
+                     <columns>
+                        <TableColumn fx:id="columnFechaHistorialMascota" prefWidth="369.99998982747394" text="Fecha" />
+                     </columns>
+                  </TableView>
                </children>
             </AnchorPane>
         </content>
@@ -255,20 +253,20 @@
                   <Label layoutX="361.0" layoutY="49.0" text="Fecha Final" />
                   <DatePicker fx:id="DatePickerFechaFinal" layoutX="431.0" layoutY="45.0" />
                   <DatePicker fx:id="DatePickerFechaInicio" layoutX="145.0" layoutY="45.0" />
-                  <TableView layoutX="83.0" layoutY="180.0" prefHeight="261.0" prefWidth="548.0" style="-fx-border-color: #0598ff; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px;">
-                    <columns>
-                      <TableColumn fx:id="TreeTCIdFechaFiltrar" prefWidth="75.0" text="Fecha" />
-                      <TableColumn fx:id="TreeTCIdIdCitaFiltrar" prefWidth="75.0" text="ID Cita" />
-                        <TableColumn fx:id="TreeTCIdVetFiltrar" prefWidth="143.3333282470703" text="Veterinario" />
-                        <TableColumn fx:id="TreeTCIdMascotaFiltrar" prefWidth="122.0" text="Mascota" />
-                        <TableColumn fx:id="TreeTCIdEstadoFiltrar" prefWidth="132.00003051757812" text="Estado" />
-                    </columns>
-                  </TableView>
                   <Button fx:id="btnFiltrarHistorial2" layoutX="273.0" layoutY="101.0" mnemonicParsing="false" onAction="#filtrarFechaCitas" prefHeight="31.0" prefWidth="135.0" style="-fx-background-radius: 60; -fx-background-color: #0598ff;" text="Filtrar">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
+                  <TableView fx:id="tableViewFiltroFecha" layoutX="35.0" layoutY="181.0" prefHeight="259.0" prefWidth="612.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;">
+                     <columns>
+                        <TableColumn fx:id="columnFechaFiltro" prefWidth="84.00003433227539" text="Fecha" />
+                        <TableColumn fx:id="columnIDCitaFiltro" prefWidth="129.33329010009766" text="ID Cita" />
+                        <TableColumn fx:id="columnVeterinarioFiltro" prefWidth="128.00006103515625" text="Veterinario" />
+                        <TableColumn fx:id="columnMascotaFiltro" prefWidth="151.33328247070312" text="Mascota" />
+                        <TableColumn fx:id="columnEstadoFiltro" prefWidth="120.0" text="Estado" />
+                     </columns>
+                  </TableView>
                </children>
             </AnchorPane>
         </content>

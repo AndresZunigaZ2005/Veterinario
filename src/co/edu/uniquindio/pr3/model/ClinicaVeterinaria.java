@@ -1,7 +1,9 @@
 package co.edu.uniquindio.pr3.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -11,8 +13,12 @@ import co.edu.uniquindio.pr3.exceptions.ClienteException;
 import co.edu.uniquindio.pr3.exceptions.MascotaException;
 import co.edu.uniquindio.pr3.exceptions.RegistroVeterinarioException;
 
-public class ClinicaVeterinaria {
+public class ClinicaVeterinaria implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nombre;
 	private Veterinario[] listaVeterinarios;
 	private List<Cliente> listaClientes;
@@ -21,19 +27,22 @@ public class ClinicaVeterinaria {
 	
 	public ClinicaVeterinaria(String nombre) {
 		this.nombre = nombre;
+		this.listaVeterinarios = new Veterinario[4];
+		this.listaClientes = new ArrayList<>();
+		this.listaRegistroVeterinario = new ArrayList<>();
 	}
 	
 	public ClinicaVeterinaria() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public ClinicaVeterinaria(String nombre, Veterinario[] listaVeterinarios, List<Cliente> listaClientes,
+	public ClinicaVeterinaria(String nombre, List<Cliente> listaClientes,
 			List<RegistroVeterinario> listaRegistroVeterinario) {
 		super();
 		this.nombre = nombre;
-		this.listaVeterinarios = listaVeterinarios;
-		this.listaClientes = listaClientes;
-		this.listaRegistroVeterinario = listaRegistroVeterinario;
+		this.listaVeterinarios = new Veterinario[4];
+		this.listaClientes = new ArrayList<>();
+		this.listaRegistroVeterinario = new ArrayList<>();
 	}
 
 
