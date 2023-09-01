@@ -45,6 +45,7 @@ import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TouchEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -58,8 +59,11 @@ public class VentanaMenuController implements Initializable{
 	private ObservableList <RegistroVeterinario> listaRegistros = FXCollections.observableArrayList();
 
 	private ObservableList <RegistroVeterinario> listaFiltros = FXCollections.observableArrayList();
-    @FXML
-    private ComboBox<String> ComboBoxCambiarEstadoCita;
+    
+	private ObservableList <RegistroVeterinario> listaHistorialMascota = FXCollections.observableArrayList();
+	
+	@FXML
+    private ComboBox<Estado> ComboBoxCambiarEstadoCita;
 
     @FXML
     private ComboBox<Sexo> ComboBoxSexoMascota;
@@ -228,13 +232,8 @@ public class VentanaMenuController implements Initializable{
 
 
     @FXML
-    void actualizarDatosCliente(ActionEvent event) {
-
-    }
-
-    @FXML
     void actualizarEstado(ActionEvent event) {
-
+    	
     }
 
     @FXML
@@ -264,6 +263,7 @@ public class VentanaMenuController implements Initializable{
 				txtAreaDiagnosticoCita.clear();
 				txtAreaTratamientoCita.clear();
 				txtFieldCedulaBuscarMascotasCita.clear();
+				comboBoxSelMascotaICita.setValue(null);
 				//tableViewCitas.setItems(listaRegistros);
         	} catch (RegistroVeterinarioException e) {
 				e.printStackTrace();
@@ -365,7 +365,7 @@ public class VentanaMenuController implements Initializable{
 	    	if(cliente==null) {
 	    		alerta(AlertType.WARNING,"Atención","Error al buscar mascotas","El cliente no existe");
 	    	}else {
-	    		comboBoxSelMascotaICita.getItems().addAll(cliente.getListaMascotas().toArray(new Mascota[cliente.getListaMascotas().size()]));
+	    		comboBoxSelMascotaICita.getItems().addAll(cliente.getListaMascotas());
 	    	}
 		} catch (ClienteException e) {
 			// TODO Auto-generated catch block
@@ -395,8 +395,26 @@ public class VentanaMenuController implements Initializable{
     		alerta(AlertType.ERROR, "Error", "No se ha visto el historial de la mascota", "Rellene todos los campos");
     	}
     	else {
-    		
+    		listaHistorialMascota.clear();
+    		Mascota buscarMascota=comboBoxSelMascotaHistorial.getValue();
+    		for (RegistroVeterinario registroVeterinario : clinicaVeterinaria.getListaRegistroVeterinario()) {
+				if(registroVeterinario.getMascota().equals(buscarMascota)) {
+					listaHistorialMascota.add(registroVeterinario);
+				}
+			}
+    		tableViewHistorialMascota.setItems(listaHistorialMascota);
+    		alerta(AlertType.CONFIRMATION, "Historial de citas de la mascota", "Estas son todas las citas que ha tenido la mascota", "Si desea ver el tratamiento y el diagnostico seleccione la fecha que desee");
     	}
+    }
+    
+    @FXML
+    private void onTableViewClickedHistorial(MouseEvent event) {
+        RegistroVeterinario registroSeleccionado = tableViewHistorialMascota.getSelectionModel().getSelectedItem();
+
+        if (registroSeleccionado != null) {
+            txtAreaDiagnosticoHistorial.setText(registroSeleccionado.getDiagnostico());
+            txtAreaTratamientoHistorial.setText(registroSeleccionado.getTratamiento());
+        }
     }
 
 	public void setStage(Stage primaryStage) {
@@ -449,7 +467,7 @@ public class VentanaMenuController implements Initializable{
             RegistroVeterinario registroVeterinario = getTableRow().getItem();
             if (registroVeterinario != null) {
                 // Lógica que deseas realizar al hacer clic en el botón
-                System.out.println("Clic en el botón para: " + registroVeterinario.getIdCita());
+                System.out.println(70000+Math.random()*(500000-70000));
             }
         }
     }
@@ -472,6 +490,9 @@ public class VentanaMenuController implements Initializable{
 	
 	public void inicializar() {
 		
+		txtAreaDiagnosticoHistorial.setEditable(false);
+		txtAreaTratamientoHistorial.setEditable(false);
+		
 		SpinnerHoraCita.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0));
 		SpinnerMinutosCita.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0)); 
 		
@@ -480,6 +501,8 @@ public class VentanaMenuController implements Initializable{
 		ComboBoxTipoMascota.getSelectionModel().selectFirst();
 		ComboBoxSexoMascota.getItems().addAll(Sexo.values());
 		ComboBoxSexoMascota.getSelectionModel().selectFirst();
+		ComboBoxCambiarEstadoCita.getItems().addAll(Estado.values());
+		ComboBoxCambiarEstadoCita.getSelectionModel().selectFirst();
 		
 		clinicaVeterinaria = new ClinicaVeterinaria("Patitas Peludas");
 		System.out.println("Hola");
@@ -505,7 +528,7 @@ public class VentanaMenuController implements Initializable{
 		columnFechaCita.setCellValueFactory(new PropertyValueFactory<>("Fecha"));
 		columnFactura.setCellValueFactory(new PropertyValueFactory<>("Factura"));
 		
-		
+		columnFechaHistorialMascota.setCellValueFactory(new PropertyValueFactory<>("Fecha"));
 		
         columnFechaFiltro.setCellValueFactory(new PropertyValueFactory<>("Fecha"));
         columnVeterinarioFiltro.setCellValueFactory(new PropertyValueFactory<>("Veterinario"));

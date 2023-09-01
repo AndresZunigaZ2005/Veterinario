@@ -162,12 +162,13 @@ public class ClinicaVeterinaria {
 	}
 	
 	
-	public void actualizarCliente(String nombre, String telefono, String correo, String cedula) throws ClienteException {
+	public void actualizarCliente(String nombre, String telefono, String correo, String direccion,String cedula) throws ClienteException {
 		Cliente actualizarCliente = obtenerCliente(cedula);
 		if(actualizarCliente != null) {
 			actualizarCliente.setNombre(nombre);
 			actualizarCliente.setTelefono(telefono);
 			actualizarCliente.setCorreo(correo);
+			actualizarCliente.setDireccion(direccion);
 		}
 	}
 	

@@ -235,7 +235,7 @@
                   <TextArea fx:id="txtAreaTratamientoHistorial" layoutX="361.0" layoutY="288.0" prefHeight="167.0" prefWidth="278.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
                   <Label layoutX="141.0" layoutY="260.0" text="Diagnóstico" />
                   <Label layoutX="468.0" layoutY="260.0" text="Tratamiento" />
-                  <TableView fx:id="tableViewHistorialMascota" layoutX="293.0" layoutY="23.0" prefHeight="223.0" prefWidth="371.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;">
+                  <TableView fx:id="tableViewHistorialMascota" layoutX="293.0" layoutY="23.0" onMouseClicked="#onTableViewClickedHistorial" prefHeight="223.0" prefWidth="371.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;">
                      <columns>
                         <TableColumn fx:id="columnFechaHistorialMascota" prefWidth="369.99998982747394" text="Fecha" />
                      </columns>
