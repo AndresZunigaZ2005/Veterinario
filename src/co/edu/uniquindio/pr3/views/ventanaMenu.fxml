@@ -206,12 +206,11 @@
                   </Button>
                   <TableView fx:id="tableViewCitas" layoutX="22.0" layoutY="168.0" prefHeight="278.0" prefWidth="643.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;">
                      <columns>
-                        <TableColumn fx:id="columnIDCita" prefWidth="57.33334732055664" text="ID Cita" />
                         <TableColumn fx:id="columnFechaCita" prefWidth="111.3333740234375" text="Fecha" />
                         <TableColumn fx:id="columnEstadoCita" prefWidth="113.33328247070312" text="Estado" />
-                        <TableColumn fx:id="columnVeterinarioCita" prefWidth="141.99999237060547" text="Veterinario" />
-                        <TableColumn fx:id="columnMascotaCita" prefWidth="115.33332824707031" text="Mascota" />
-                        <TableColumn fx:id="columnFactura" prefWidth="103.3333740234375" text="Factura" />
+                        <TableColumn fx:id="columnVeterinarioCita" prefWidth="163.3333282470703" text="Veterinario" />
+                        <TableColumn fx:id="columnMascotaCita" prefWidth="136.66665649414062" text="Mascota" />
+                        <TableColumn fx:id="columnFactura" prefWidth="117.33331298828125" text="Factura" />
                      </columns>
                   </TableView>
                </children>
@@ -225,7 +224,7 @@
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f5f5f5" height="210.0" layoutX="34.0" layoutY="28.0" stroke="BLACK" strokeType="INSIDE" width="213.0" />
                   <ComboBox fx:id="comboBoxSelMascotaHistorial" layoutX="62.0" layoutY="151.0" prefHeight="27.0" prefWidth="175.0" promptText="Seleccione la Mascota" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
                   <Label layoutX="85.0" layoutY="126.0" text="Macotas del Dueño" />
-                  <TextField fx:id="txtFieldCedulaDueñoHistorial" layoutX="66.0" layoutY="75.0" promptText="Cédula" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                  <TextField fx:id="txtFieldCedulaDueñoHistorial" layoutX="66.0" layoutY="75.0" onAction="#llenarComboMascotasDueñoHistorial" promptText="Cédula" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
                   <Label layoutX="93.0" layoutY="42.0" text="Cédula del Dueño" />
                   <Button fx:id="btnFiltrarMascotaHistorial" layoutX="73.0" layoutY="194.0" mnemonicParsing="false" onAction="#verHistorialMascota" prefHeight="31.0" prefWidth="135.0" style="-fx-background-radius: 60; -fx-background-color: #0598ff;" text="Ver Historial">
                      <font>
@@ -260,11 +259,10 @@
                   </Button>
                   <TableView fx:id="tableViewFiltroFecha" layoutX="35.0" layoutY="181.0" prefHeight="259.0" prefWidth="612.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;">
                      <columns>
-                        <TableColumn fx:id="columnFechaFiltro" prefWidth="84.00003433227539" text="Fecha" />
-                        <TableColumn fx:id="columnIDCitaFiltro" prefWidth="129.33329010009766" text="ID Cita" />
-                        <TableColumn fx:id="columnVeterinarioFiltro" prefWidth="128.00006103515625" text="Veterinario" />
-                        <TableColumn fx:id="columnMascotaFiltro" prefWidth="151.33328247070312" text="Mascota" />
-                        <TableColumn fx:id="columnEstadoFiltro" prefWidth="120.0" text="Estado" />
+                        <TableColumn fx:id="columnFechaFiltro" prefWidth="135.3333396911621" text="Fecha" />
+                        <TableColumn fx:id="columnVeterinarioFiltro" prefWidth="174.66664123535156" text="Veterinario" />
+                        <TableColumn fx:id="columnMascotaFiltro" prefWidth="156.66668701171875" text="Mascota" />
+                        <TableColumn fx:id="columnEstadoFiltro" prefWidth="146.66665649414062" text="Estado" />
                      </columns>
                   </TableView>
                </children>

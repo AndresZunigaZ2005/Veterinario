@@ -4,8 +4,10 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import co.edu.uniquindio.pr3.exceptions.ClienteException;
 import co.edu.uniquindio.pr3.exceptions.MascotaException;
@@ -55,6 +57,7 @@ public class VentanaMenuController implements Initializable{
 	
 	private ObservableList <RegistroVeterinario> listaRegistros = FXCollections.observableArrayList();
 
+	private ObservableList <RegistroVeterinario> listaFiltros = FXCollections.observableArrayList();
     @FXML
     private ComboBox<String> ComboBoxCambiarEstadoCita;
 
@@ -104,7 +107,7 @@ public class VentanaMenuController implements Initializable{
     private TableColumn<RegistroVeterinario, Estado> columnEstadoCita;
 
     @FXML
-    private TableColumn<?, ?> columnEstadoFiltro;
+    private TableColumn<RegistroVeterinario, Estado> columnEstadoFiltro;
 
     @FXML
     private TableColumn<RegistroVeterinario, Void> columnFactura;
@@ -113,28 +116,22 @@ public class VentanaMenuController implements Initializable{
     private TableColumn<RegistroVeterinario, String> columnFechaCita;
 
     @FXML
-    private TableColumn<?, ?> columnFechaFiltro;
+    private TableColumn<RegistroVeterinario, LocalDateTime> columnFechaFiltro;
 
     @FXML
-    private TableColumn<?, ?> columnFechaHistorialMascota;
-
-    @FXML
-    private TableColumn<RegistroVeterinario, UUID> columnIDCita;
-
-    @FXML
-    private TableColumn<?, ?> columnIDCitaFiltro;
-
+    private TableColumn<RegistroVeterinario, LocalDateTime> columnFechaHistorialMascota;
+    
     @FXML
     private TableColumn<RegistroVeterinario, Mascota> columnMascotaCita;
 
     @FXML
-    private TableColumn<?, ?> columnMascotaFiltro;
+    private TableColumn<RegistroVeterinario, Mascota> columnMascotaFiltro;
 
     @FXML
     private TableColumn<RegistroVeterinario, Veterinario> columnVeterinarioCita;
 
     @FXML
-    private TableColumn<?, ?> columnVeterinarioFiltro;
+    private TableColumn<RegistroVeterinario, Veterinario> columnVeterinarioFiltro;
 
     @FXML
     private TableColumn<Cliente, String> columnaCedula;
@@ -152,7 +149,7 @@ public class VentanaMenuController implements Initializable{
     private TableColumn<Cliente, String> columnaTelefono;
 
     @FXML
-    private ComboBox<?> comboBoxSelMascotaHistorial;
+    private ComboBox<Mascota> comboBoxSelMascotaHistorial;
 
     @FXML
     private ComboBox<Mascota> comboBoxSelMascotaICita;
@@ -164,10 +161,10 @@ public class VentanaMenuController implements Initializable{
     private TableView<RegistroVeterinario> tableViewCitas;
 
     @FXML
-    private TableView<?> tableViewFiltroFecha;
+    private TableView<RegistroVeterinario> tableViewFiltroFecha;
 
     @FXML
-    private TableView<?> tableViewHistorialMascota;
+    private TableView<RegistroVeterinario> tableViewHistorialMascota;
 
     @FXML
     private TableView<Cliente> tableViewVerClientes;
@@ -266,6 +263,7 @@ public class VentanaMenuController implements Initializable{
 				SpinnerMinutosCita.getValueFactory().setValue(0);
 				txtAreaDiagnosticoCita.clear();
 				txtAreaTratamientoCita.clear();
+				txtFieldCedulaBuscarMascotasCita.clear();
 				//tableViewCitas.setItems(listaRegistros);
         	} catch (RegistroVeterinarioException e) {
 				e.printStackTrace();
@@ -275,7 +273,25 @@ public class VentanaMenuController implements Initializable{
 
     @FXML
     void filtrarFechaCitas(ActionEvent event) {
-    	
+    	if(DatePickerFechaFinal.getValue().equals(null) || DatePickerFechaInicio.getValue().equals(null)) {
+    		alerta(AlertType.ERROR, "Error al filtar", "No se ha encontado ningun registro", "Llene todos los campos de fechas");
+    	}
+    	else {
+    		listaFiltros.clear();
+        	LocalDate fechaInicio = DatePickerFechaInicio.getValue();// Fecha de inicio
+        	LocalDate fechaFin = DatePickerFechaFinal.getValue(); // Fecha de fin
+        	for (RegistroVeterinario registroVeterinario : clinicaVeterinaria.getListaRegistroVeterinario()) {
+        		if(estaDentroDelRango(registroVeterinario.getFecha(), fechaInicio, fechaFin)) {
+					listaFiltros.add(registroVeterinario);
+				}
+			}
+        	if(listaRegistros.size()==0) {
+        		alerta(AlertType.INFORMATION, "Error", "No se ha encontado ningun registro", "No hay ninguna cita en el rango de fechas");
+        	}
+        	else {
+        		tableViewFiltroFecha.setItems(listaFiltros);
+        	}
+    	}
     }
 
     @FXML
@@ -356,10 +372,31 @@ public class VentanaMenuController implements Initializable{
 			e.printStackTrace();
 		}
     }
+    
+    @FXML
+    void llenarComboMascotasDueñoHistorial(ActionEvent event) {
+    	Cliente cliente;
+		try {
+			cliente = clinicaVeterinaria.obtenerCliente(txtFieldCedulaDueñoHistorial.getText());
+	    	if(cliente==null) {
+	    		alerta(AlertType.WARNING,"Atención","Error al buscar mascotas","El cliente no existe");
+	    	}else {
+	    		comboBoxSelMascotaHistorial.getItems().addAll(cliente.getListaMascotas().toArray(new Mascota[cliente.getListaMascotas().size()]));
+	    	}
+		} catch (ClienteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 
     @FXML
     void verHistorialMascota(ActionEvent event) {
-    	
+    	if(txtFieldCedulaDueñoHistorial.getText()=="" || comboBoxSelMascotaHistorial.getValue().equals(null)) {
+    		alerta(AlertType.ERROR, "Error", "No se ha visto el historial de la mascota", "Rellene todos los campos");
+    	}
+    	else {
+    		
+    	}
     }
 
 	public void setStage(Stage primaryStage) {
@@ -417,7 +454,13 @@ public class VentanaMenuController implements Initializable{
         }
     }
 	
-	
+    public static boolean estaDentroDelRango(LocalDateTime dateTime, LocalDate fechaInicio, LocalDate fechaFin) {
+        LocalDate fechaTime = dateTime.toLocalDate();
+
+        return !fechaTime.isBefore(fechaInicio) && !fechaTime.isAfter(fechaFin);
+    }
+    
+    
 	
 	
 	@Override
@@ -457,14 +500,21 @@ public class VentanaMenuController implements Initializable{
 		columnaDireccion.setCellValueFactory(new PropertyValueFactory<>("Direccion"));
 		
 		columnEstadoCita.setCellValueFactory(new PropertyValueFactory<>("Estado"));
-		columnIDCita.setCellValueFactory(new PropertyValueFactory<>("ID Cita"));
 		columnVeterinarioCita.setCellValueFactory(new PropertyValueFactory<>("Veterinario"));
 		columnMascotaCita.setCellValueFactory(new PropertyValueFactory<>("Mascota"));
 		columnFechaCita.setCellValueFactory(new PropertyValueFactory<>("Fecha"));
 		columnFactura.setCellValueFactory(new PropertyValueFactory<>("Factura"));
 		
+		
+		
+        columnFechaFiltro.setCellValueFactory(new PropertyValueFactory<>("Fecha"));
+        columnVeterinarioFiltro.setCellValueFactory(new PropertyValueFactory<>("Veterinario"));
+		columnMascotaFiltro.setCellValueFactory(new PropertyValueFactory<>("Mascota"));
+		columnEstadoFiltro.setCellValueFactory(new PropertyValueFactory<>("Estado"));
+        
         columnFactura.setCellFactory(new Callback<TableColumn<RegistroVeterinario, Void>, TableCell<RegistroVeterinario, Void>>() {
-            @Override
+                	
+        	@Override
             public TableCell<RegistroVeterinario, Void> call(TableColumn<RegistroVeterinario, Void> param) {
                 return new BotonTableCell();
             }
