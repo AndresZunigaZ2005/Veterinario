@@ -177,10 +177,10 @@
                   </Button>
                   <TableView fx:id="tableViewVerClientes" layoutX="44.0" layoutY="212.0" prefHeight="223.0" prefWidth="612.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;">
                      <columns>
-                        <TableColumn fx:id="columnaCedula" prefWidth="77.33334732055664" text="Cedula" />
                         <TableColumn fx:id="columnaNombre" prefWidth="110.6666488647461" text="Nombre" />
-                        <TableColumn fx:id="columnaTelefono" prefWidth="118.66670227050781" text="Telefono" />
-                        <TableColumn fx:id="columnaCorreo" prefWidth="131.33331298828125" text="Correo" />
+                        <TableColumn fx:id="columnaTelefono" prefWidth="91.33334350585938" text="Telefono" />
+                        <TableColumn fx:id="columnaCorreo" prefWidth="152.66664123535156" text="Correo" />
+                        <TableColumn fx:id="columnaCedula" prefWidth="84.66668701171875" text="Cedula" />
                         <TableColumn fx:id="columnaDireccion" prefWidth="174.66665649414062" text="Direccion" />
                      </columns>
                   </TableView>
@@ -206,11 +206,11 @@
                   </Button>
                   <TableView fx:id="tableViewCitas" layoutX="22.0" layoutY="168.0" prefHeight="278.0" prefWidth="643.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;">
                      <columns>
-                        <TableColumn fx:id="columnIDCita" prefWidth="57.33334732055664" text="ID CIta" />
-                        <TableColumn fx:id="columnVeterinarioCita" prefWidth="141.99999237060547" text="Veterinario" />
-                        <TableColumn fx:id="columnMascotaCita" prefWidth="115.33332824707031" text="Mascota" />
+                        <TableColumn fx:id="columnIDCita" prefWidth="57.33334732055664" text="ID Cita" />
                         <TableColumn fx:id="columnFechaCita" prefWidth="111.3333740234375" text="Fecha" />
                         <TableColumn fx:id="columnEstadoCita" prefWidth="113.33328247070312" text="Estado" />
+                        <TableColumn fx:id="columnVeterinarioCita" prefWidth="141.99999237060547" text="Veterinario" />
+                        <TableColumn fx:id="columnMascotaCita" prefWidth="115.33332824707031" text="Mascota" />
                         <TableColumn fx:id="columnFactura" prefWidth="103.3333740234375" text="Factura" />
                      </columns>
                   </TableView>

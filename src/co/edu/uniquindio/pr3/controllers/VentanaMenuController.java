@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 import co.edu.uniquindio.pr3.exceptions.ClienteException;
 import co.edu.uniquindio.pr3.exceptions.MascotaException;
@@ -31,6 +32,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -49,7 +51,9 @@ public class VentanaMenuController implements Initializable{
 	
 	private ClinicaVeterinaria clinicaVeterinaria; 
 	
-	ObservableList <Cliente> listaClientes;
+	private ObservableList <Cliente> listaClientes = FXCollections.observableArrayList();
+	
+	private ObservableList <RegistroVeterinario> listaRegistros = FXCollections.observableArrayList();
 
     @FXML
     private ComboBox<String> ComboBoxCambiarEstadoCita;
@@ -97,16 +101,16 @@ public class VentanaMenuController implements Initializable{
     private Button btnRegistrarMascota;
 
     @FXML
-    private TableColumn<?, ?> columnEstadoCita;
+    private TableColumn<RegistroVeterinario, Estado> columnEstadoCita;
 
     @FXML
     private TableColumn<?, ?> columnEstadoFiltro;
 
     @FXML
-    private TableColumn<?, ?> columnFactura;
+    private TableColumn<RegistroVeterinario, Void> columnFactura;
 
     @FXML
-    private TableColumn<?, ?> columnFechaCita;
+    private TableColumn<RegistroVeterinario, String> columnFechaCita;
 
     @FXML
     private TableColumn<?, ?> columnFechaFiltro;
@@ -115,19 +119,19 @@ public class VentanaMenuController implements Initializable{
     private TableColumn<?, ?> columnFechaHistorialMascota;
 
     @FXML
-    private TableColumn<?, ?> columnIDCita;
+    private TableColumn<RegistroVeterinario, UUID> columnIDCita;
 
     @FXML
     private TableColumn<?, ?> columnIDCitaFiltro;
 
     @FXML
-    private TableColumn<?, ?> columnMascotaCita;
+    private TableColumn<RegistroVeterinario, Mascota> columnMascotaCita;
 
     @FXML
     private TableColumn<?, ?> columnMascotaFiltro;
 
     @FXML
-    private TableColumn<?, ?> columnVeterinarioCita;
+    private TableColumn<RegistroVeterinario, Veterinario> columnVeterinarioCita;
 
     @FXML
     private TableColumn<?, ?> columnVeterinarioFiltro;
@@ -157,7 +161,7 @@ public class VentanaMenuController implements Initializable{
     private ComboBox<Veterinario> comboBoxSelVet;
 
     @FXML
-    private TableView<?> tableViewCitas;
+    private TableView<RegistroVeterinario> tableViewCitas;
 
     @FXML
     private TableView<?> tableViewFiltroFecha;
@@ -254,8 +258,16 @@ public class VentanaMenuController implements Initializable{
         }else {
         	try {
 				clinicaVeterinaria.aniadirRegistroVeterinario(selectedDateTime, diagnostico, tratamiento, Estado.CREADA, veterinario, null, mascota);
-			} catch (RegistroVeterinarioException e) {
-				// TODO Auto-generated catch block
+				RegistroVeterinario registroVeterinario = new RegistroVeterinario(selectedDateTime, diagnostico, tratamiento, Estado.CREADA, veterinario, mascota);
+				listaRegistros.add(registroVeterinario);
+				tableViewCitas.setItems(listaRegistros);
+				DatePickerFechaCita.setValue(null);
+				SpinnerHoraCita.getValueFactory().setValue(0);
+				SpinnerMinutosCita.getValueFactory().setValue(0);
+				txtAreaDiagnosticoCita.clear();
+				txtAreaTratamientoCita.clear();
+				//tableViewCitas.setItems(listaRegistros);
+        	} catch (RegistroVeterinarioException e) {
 				e.printStackTrace();
 			}
         }
@@ -272,8 +284,8 @@ public class VentanaMenuController implements Initializable{
     	String title="Error al registrar el cliente";
     	String header="No se ha registrado el cliente";
     	String content="Rellene todos los campos";
-    	if(verificarTextField(txtFieldNombreCliente) || verificarTextField(txtFieldTelefonoCliente) 
-    			|| verificarTextField(txtFieldDireccionCliente) || verificarTextField(txtFieldCorreoCliente) || verificarTextField(txtFieldCedulaCliente)) {
+    	if(!verificarTextField(txtFieldNombreCliente) || !verificarTextField(txtFieldTelefonoCliente) 
+    			|| !verificarTextField(txtFieldDireccionCliente) || !verificarTextField(txtFieldCorreoCliente) || !verificarTextField(txtFieldCedulaCliente)) {
     		alerta(AlertType.ERROR, title, header, content);
     	}else {
     		String nombreCliente = devolverStringTextField(txtFieldNombreCliente);
@@ -283,9 +295,9 @@ public class VentanaMenuController implements Initializable{
     		String cedulaCliente = devolverStringTextField(txtFieldCedulaCliente);   	    	
     		try {
     			clinicaVeterinaria.crearCliente(nombreCliente, telefonoCliente, correoCliente, cedulaCliente, direccionCliente);
+    			//System.out.println(clinicaVeterinaria.obtenerCliente(cedulaCliente).toString());
     			Cliente cliente = new Cliente(nombreCliente, telefonoCliente, correoCliente, cedulaCliente, direccionCliente);
     			listaClientes.add(cliente);
-    			//columnaCedula.(cedulaCliente);
     			tableViewVerClientes.setItems(listaClientes);
     			txtFieldNombreCliente.clear();
     			txtFieldTelefonoCliente.clear();
@@ -303,25 +315,27 @@ public class VentanaMenuController implements Initializable{
     @FXML
     void regitrarMascota(ActionEvent event) {
     	
-    	String nombreMascota = txtFieldNombreMascota.getText();
-    	int edad = Integer.parseInt(txtFieldEdadMascota.getText());
-    	String raza = txtFieldRazaMascota.getText();
-    	Sexo sexoSTR = ComboBoxSexoMascota.getValue();
-    	Tipo tipoSTR = ComboBoxTipoMascota.getValue();
-    	String cedulaDueño = txtFieldCedulaMascota.getText();
-    	
-    	if(verificarTextField(txtFieldNombreMascota) || verificarTextField(txtFieldEdadMascota)
-    			|| verificarTextField(txtFieldRazaMascota) || verificarTextField(txtFieldCedulaMascota)) {
+    	if(!verificarTextField(txtFieldNombreMascota) || !verificarTextField(txtFieldEdadMascota)
+    			|| !verificarTextField(txtFieldRazaMascota) || !verificarTextField(txtFieldCedulaMascota)) {
     		alerta(AlertType.ERROR, "Error","Error al registrar la mascota","Rellene todos los campos");
-    	}else {
+    	}else if (!txtFieldEdadMascota.getText().matches("\\d*")) {
+            alerta(AlertType.ERROR,"Error", "Error al registrar la mascota","Solo se pueden ingresar caracteres numéricos en la edad.");
+        }else {
     		try {
+    	    	String nombreMascota = txtFieldNombreMascota.getText();
+    	    	int edad = Integer.parseInt(txtFieldEdadMascota.getText());
+    	    	String raza = txtFieldRazaMascota.getText();
+    	    	Sexo sexoSTR = ComboBoxSexoMascota.getValue();
+    	    	Tipo tipoSTR = ComboBoxTipoMascota.getValue();
+    	    	Cliente cedulaDueño = clinicaVeterinaria.obtenerCliente(txtFieldCedulaMascota.getText());
+    	    	System.out.println(cedulaDueño.toString());
     			clinicaVeterinaria.aniadirMascotaCliente(nombreMascota, edad , raza, sexoSTR , tipoSTR, cedulaDueño);
-    			txtFieldNombreMascota.setText("");
-    			txtFieldEdadMascota.setText("");
-    			txtFieldRazaMascota.setText("");
-    			txtFieldCedulaMascota.setText("");
+    			txtFieldNombreMascota.clear();
+    			txtFieldEdadMascota.clear();
+    			txtFieldRazaMascota.clear();
+    			txtFieldCedulaMascota.clear();
     			alerta(AlertType.INFORMATION,"Mascota Registrada","Registro de Mascota exitoso", "La mascota ha sido añadida de manera exitosa a la cédula "+cedulaDueño);
-    		} catch (MascotaException e) {
+    		} catch (MascotaException | ClienteException e) {
     			alerta(AlertType.ERROR, "Error", "La mascota no se ha añadido", "La cédula del dueño no existe");
     			e.printStackTrace();
     		}
@@ -329,12 +343,18 @@ public class VentanaMenuController implements Initializable{
     }
     @FXML
     void llenarComboMascotasDueño(ActionEvent event) {
-    	Cliente cliente = clinicaVeterinaria.obtenerCliente(txtFieldCedulaBuscarMascotasCita.getText());
-    	if(cliente==null) {
-    		alerta(AlertType.WARNING,"Atención","Error al buscar mascotas","El cliente no existe");
-    	}else {
-    		comboBoxSelMascotaICita.getItems().addAll(cliente.getListaMascotas().toArray(new Mascota[cliente.getListaMascotas().size()]));
-    	}
+    	Cliente cliente;
+		try {
+			cliente = clinicaVeterinaria.obtenerCliente(txtFieldCedulaBuscarMascotasCita.getText());
+	    	if(cliente==null) {
+	    		alerta(AlertType.WARNING,"Atención","Error al buscar mascotas","El cliente no existe");
+	    	}else {
+	    		comboBoxSelMascotaICita.getItems().addAll(cliente.getListaMascotas().toArray(new Mascota[cliente.getListaMascotas().size()]));
+	    	}
+		} catch (ClienteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     @FXML
@@ -358,9 +378,9 @@ public class VentanaMenuController implements Initializable{
 	
 	public static boolean verificarTextField(TextField textField) {
 		if(textField.getText().equals("")) {
-			return true;
+			return false;
 		}
-		return false;
+		return true;
 	}
 	
 	public static String devolverStringTextField(TextField textField){
@@ -370,9 +390,32 @@ public class VentanaMenuController implements Initializable{
 		return "";
 	}
 	
-	
-	
-	
+    private class BotonTableCell extends TableCell<RegistroVeterinario, Void> {
+        private final Button boton = new Button("Mi Botón");
+
+        public BotonTableCell() {
+            boton.setOnAction(this::onBotonClick);
+        }
+
+        @Override
+        protected void updateItem(Void item, boolean empty) {
+            super.updateItem(item, empty);
+
+            if (empty) {
+                setGraphic(null);
+            } else {
+                setGraphic(boton);
+            }
+        }
+
+        private void onBotonClick(ActionEvent event) {
+            RegistroVeterinario registroVeterinario = getTableRow().getItem();
+            if (registroVeterinario != null) {
+                // Lógica que deseas realizar al hacer clic en el botón
+                System.out.println("Clic en el botón para: " + registroVeterinario.getIdCita());
+            }
+        }
+    }
 	
 	
 	
@@ -387,16 +430,16 @@ public class VentanaMenuController implements Initializable{
 	public void inicializar() {
 		
 		SpinnerHoraCita.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 0));
-		SpinnerMinutosCita.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
+		SpinnerMinutosCita.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0)); 
 		
-		listaClientes = FXCollections.observableArrayList();
 		
 		ComboBoxTipoMascota.getItems().addAll(Tipo.values());
 		ComboBoxTipoMascota.getSelectionModel().selectFirst();
 		ComboBoxSexoMascota.getItems().addAll(Sexo.values());
 		ComboBoxSexoMascota.getSelectionModel().selectFirst();
 		
-		this.clinicaVeterinaria = new ClinicaVeterinaria("Patitas Peluda");
+		clinicaVeterinaria = new ClinicaVeterinaria("Patitas Peludas");
+		System.out.println("Hola");
 		Veterinario vet1 = new Veterinario("Luis", "32677297", "luisc.calderonc@uqvirtual.edu.co","vet1");
 		Veterinario vet2 = new Veterinario("Pacho", "solo las bandidas", "andrese.perezm@uqvirtual.edu.co", "vet2");
 		Veterinario vet3 = new Veterinario("ZZ", "3218861990", "andresf.zunigaz@uqvirtual.edu.co", "vet3");
@@ -407,13 +450,26 @@ public class VentanaMenuController implements Initializable{
 		listVet[2] = vet3;
 		listVet[3] = vet4;
 		
-	    this.columnaCedula.setCellValueFactory(new PropertyValueFactory<>("Cédula")); 
-	    this.columnaCorreo.setCellValueFactory(new PropertyValueFactory<>("Correo"));
-	    this.columnaDireccion.setCellValueFactory(new PropertyValueFactory<>("Dirección"));
-	    this.columnaNombre.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
-	    this.columnaTelefono.setCellValueFactory(new PropertyValueFactory<>("Teléfono"));
-	    //tableViewVerClientes.getColumns().addAll(columnaCedula,columnaNombre,columnaTelefono,columnaCorreo,columnaDireccion);
-	
+		columnaCedula.setCellValueFactory(new PropertyValueFactory<>("Cedula"));
+		columnaNombre.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
+		columnaTelefono.setCellValueFactory(new PropertyValueFactory<>("Telefono"));
+		columnaCorreo.setCellValueFactory(new PropertyValueFactory<>("Correo"));
+		columnaDireccion.setCellValueFactory(new PropertyValueFactory<>("Direccion"));
+		
+		columnEstadoCita.setCellValueFactory(new PropertyValueFactory<>("Estado"));
+		columnIDCita.setCellValueFactory(new PropertyValueFactory<>("ID Cita"));
+		columnVeterinarioCita.setCellValueFactory(new PropertyValueFactory<>("Veterinario"));
+		columnMascotaCita.setCellValueFactory(new PropertyValueFactory<>("Mascota"));
+		columnFechaCita.setCellValueFactory(new PropertyValueFactory<>("Fecha"));
+		columnFactura.setCellValueFactory(new PropertyValueFactory<>("Factura"));
+		
+        columnFactura.setCellFactory(new Callback<TableColumn<RegistroVeterinario, Void>, TableCell<RegistroVeterinario, Void>>() {
+            @Override
+            public TableCell<RegistroVeterinario, Void> call(TableColumn<RegistroVeterinario, Void> param) {
+                return new BotonTableCell();
+            }
+        });
+		
 	    comboBoxSelVet.getItems().addAll(listVet);
 	    comboBoxSelVet.setCellFactory((Callback<ListView<Veterinario>, ListCell<Veterinario>>) new Callback<ListView<Veterinario>, ListCell<Veterinario>>() {
             @Override
