@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.pr3.controllers.ventanaInicialController">
+   <left>
+      <AnchorPane prefHeight="500.0" prefWidth="300.0" style="-fx-background-color: #0598ff;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="274.0" fitWidth="176.0" layoutX="59.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../imagenes/imagi.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="67.0" layoutY="74.0" text="Patitas Peludas" textFill="#ffffffee">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="111.0" layoutY="109.0" prefHeight="26.0" prefWidth="72.0" text="Registro">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="500.0" prefWidth="415.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="txtFieldNombre" layoutX="113.0" layoutY="57.0" prefHeight="25.0" prefWidth="197.0" promptText="Nombre" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <Label layoutX="192.0" layoutY="27.0" text="Nombre" />
+            <Label layoutX="189.0" layoutY="99.0" prefHeight="18.0" prefWidth="50.0" text="Telefono" />
+            <Label layoutX="187.0" layoutY="181.0" text="Dirección" />
+            <Label layoutX="196.0" layoutY="274.0" text="Correo" />
+            <Label layoutX="194.0" layoutY="347.0" text="Cédula" />
+            <TextField fx:id="txtFieldCorreo" layoutX="113.0" layoutY="303.0" prefHeight="25.0" prefWidth="197.0" promptText="Correo" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="txtFieldDireccion" layoutX="115.0" layoutY="222.0" prefHeight="25.0" prefWidth="197.0" promptText="Dirección" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="txtFieldCedula" layoutX="114.0" layoutY="380.0" prefHeight="25.0" prefWidth="197.0" promptText="Cédula" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+            <Button fx:id="btnRegistrar" layoutX="168.0" layoutY="436.0" mnemonicParsing="false" onAction="#registrarCliente" prefHeight="30.0" prefWidth="92.0" style="-fx-background-radius: 50; -fx-background-color: BAFEF9;" text="Registrar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <TextField fx:id="txtFieldTelefono" layoutX="115.0" layoutY="136.0" prefHeight="25.0" prefWidth="197.0" promptText="Telefono" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
