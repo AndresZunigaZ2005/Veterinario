@@ -3,9 +3,11 @@ package co.edu.uniquindio.pr3.model;
 import java.util.Objects;
 import java.util.UUID;
 
+import javafx.scene.image.Image;
+
 public class Mascota {
 
-    private UUID identificacion;
+	private UUID idMascota;
 	private String nombre;
 	private int edad;
 	private String raza;
@@ -22,21 +24,23 @@ public class Mascota {
 	 */
 	public Mascota(String nombre, int edad, String raza, Sexo sexo, Tipo tipo) {
 		super();
-		this.identificacion = UUID.randomUUID();
+		this.idMascota = UUID.randomUUID();
 		this.nombre = nombre;
 		this.edad = edad;
 		this.raza = raza;
 		this.sexo = sexo;
 		this.tipo = tipo;
 	}
-	
-	public String getIdentificacion() {
-		return identificacion.toString();
+
+	public UUID getIdMascota() {
+		return idMascota;
 	}
 
-	public void setIdentificacion(UUID identificacion) {
-		this.identificacion = identificacion;
+
+	public void setIdMascota(UUID idMascota) {
+		this.idMascota = idMascota;
 	}
+
 
 	public String getNombre() {
 		return nombre;
@@ -80,13 +84,12 @@ public class Mascota {
 
 	@Override
 	public String toString() {
-		return "Mascota [nombre=" + nombre + ", edad=" + edad + ", raza=" + raza + ", sexo=" + sexo + ", tipo=" + tipo
-				+ "]";
+		return nombre;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(identificacion);
+		return Objects.hash(edad, nombre, raza, sexo, tipo);
 	}
 
 	@Override
@@ -98,8 +101,8 @@ public class Mascota {
 		if (getClass() != obj.getClass())
 			return false;
 		Mascota other = (Mascota) obj;
-		return Objects.equals(identificacion, other.identificacion);
+		return edad == other.edad && Objects.equals(nombre, other.nombre) && Objects.equals(raza, other.raza)
+				&& sexo == other.sexo && tipo == other.tipo;
 	}
-	
 	
 }

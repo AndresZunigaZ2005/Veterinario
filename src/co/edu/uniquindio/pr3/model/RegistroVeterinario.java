@@ -1,18 +1,42 @@
 package co.edu.uniquindio.pr3.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class RegistroVeterinario {
 
     private UUID idCita;
-	private LocalDate fecha;
+	private LocalDateTime fecha;
 	private String diagnostico;
 	private String tratamiento;
 	private Estado estado;
 	private Veterinario veterinario;
 	private Factura factura;
 	private Mascota mascota;
+
+	
+	/**
+	 * 
+	 * @param idCita
+	 * @param fecha
+	 * @param diagnostico
+	 * @param tratamiento
+	 * @param estado
+	 * @param veterinario
+	 * @param mascota
+	 */
+	public RegistroVeterinario(LocalDateTime fecha, String diagnostico, String tratamiento, Estado estado,
+			Veterinario veterinario, Mascota mascota) {
+		super();
+		this.idCita = UUID.randomUUID();
+		this.fecha = fecha;
+		this.diagnostico = diagnostico;
+		this.tratamiento = tratamiento;
+		this.estado = estado;
+		this.veterinario = veterinario;
+		this.mascota = mascota;
+	}
 
 	/**
 	 *
@@ -24,7 +48,7 @@ public class RegistroVeterinario {
 	 * @param factura
 	 * @param mascota
 	 */
-	public RegistroVeterinario(LocalDate fecha, String diagnostico, String tratamiento, Estado estado,
+	public RegistroVeterinario(LocalDateTime fecha, String diagnostico, String tratamiento, Estado estado,
 			Veterinario veterinario, Factura factura, Mascota mascota) {
 		super();
 		this.idCita = UUID.randomUUID();
@@ -45,11 +69,11 @@ public class RegistroVeterinario {
 		this.idCita = idCita;
 	}
 
-	public LocalDate getFecha() {
+	public LocalDateTime getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(LocalDate fecha) {
+	public void setFecha(LocalDateTime fecha) {
 		this.fecha = fecha;
 	}
 

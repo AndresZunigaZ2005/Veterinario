@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="611.0" prefWidth="473.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f5f5f5" height="138.0" layoutX="15.0" layoutY="421.0" stroke="BLACK" strokeType="INSIDE" width="442.0" />
+      <Separator layoutX="15.0" layoutY="139.0" prefHeight="6.0" prefWidth="442.0" style="-fx-background-color: #0598ff;" />
+      <Label layoutX="22.0" layoutY="101.0" prefHeight="30.0" prefWidth="66.0" text="Factura" textFill="#0598ff">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Separator layoutX="15.0" layoutY="401.0" prefHeight="6.0" prefWidth="442.0" style="-fx-background-color: #0598ff;" />
+      <Label layoutX="111.0" layoutY="105.0" prefHeight="18.0" prefWidth="53.0" text="  Hora" textFill="#919191">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="190.0" layoutY="173.0" text="Nombre del vet" />
+      <Label layoutX="83.0" layoutY="228.0" prefHeight="18.0" prefWidth="83.0" text="Observaciones">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="33.0" layoutY="450.0" prefHeight="18.0" prefWidth="132.0" text="Nombre del dueño:">
+         <font>
+            <Font name="System Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="342.0" layoutY="449.0" text="sobreescribir1">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="342.0" layoutY="479.0" text="sobreescribir2">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextArea layoutX="22.0" layoutY="248.0" prefHeight="138.0" prefWidth="210.0" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: #0598ff;" />
+      <TextArea layoutX="248.0" layoutY="248.0" prefHeight="138.0" prefWidth="198.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+      <Label layoutX="342.0" layoutY="510.0" text="sobreescribir3">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="87.0" fitWidth="122.0" layoutX="11.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../imagenes/WhatsApp%20Image%202023-08-27%20at%206.32.57%20PM.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="124.0" fitWidth="106.0" layoutX="353.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../imagenes/WhatsApp%20Image%202023-08-31%20at%208.40.22%20PM.jpeg" />
+         </image>
+      </ImageView>
+      <Label layoutX="326.0" layoutY="228.0" prefHeight="18.0" prefWidth="54.0" text="Atencion">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="31.0" layoutY="479.0" prefHeight="18.0" prefWidth="132.0" text="Nombre del perro:">
+         <font>
+            <Font name="System Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="31.0" layoutY="511.0" prefHeight="18.0" prefWidth="132.0" text="Precio:">
+         <font>
+            <Font name="System Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="21.0" layoutY="569.0" prefHeight="18.0" prefWidth="435.0" text="/////////////////////////////////////////////////////////////////////////////////////////////" />
+      <Label layoutX="146.0" layoutY="44.0" prefHeight="38.0" prefWidth="180.0" text="Patitas peludas" textFill="#0598ff">
+         <font>
+            <Font name="Rockwell" size="26.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

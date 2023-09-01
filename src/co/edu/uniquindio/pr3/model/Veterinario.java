@@ -27,7 +27,7 @@ public class Veterinario extends Persona{
 
 	@Override
 	public String toString() {
-		return "Veterinario [nombre: "+getNombre()+", telefono: "+getTelefono()+", corrreo: "+getCorreo()+"codigo=" + codigo + "]";
+		return getNombre();
 	}
 
 	@Override

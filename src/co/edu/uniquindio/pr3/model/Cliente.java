@@ -1,5 +1,6 @@
 package co.edu.uniquindio.pr3.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -39,7 +40,7 @@ public class Cliente extends Persona{
 		super(nombre, telefono, correo);
 		this.cedula = cedula;
 		this.direccion = direccion;
-
+		this.listaMascotas = new ArrayList<>();
 	}
 
 	public String getCedula() {
@@ -65,13 +66,15 @@ public class Cliente extends Persona{
 	public void setListaMascotas(List<Mascota> listaMascotas) {
 		this.listaMascotas = listaMascotas;
 	}
+	
 
 	@Override
 	public String toString() {
-		return "Cliente [nombre: "+getNombre()+", telefono: "+getTelefono()+", corrreo: "+getCorreo()+", cedula=" + cedula + ", direccion=" + direccion + ", listaMascotas=" + listaMascotas + "]";
+		return "Cliente [cedula=" + cedula + ", direccion=" + direccion + "]";
 	}
 
-	@Override
+	
+    @Override
 	public int hashCode() {
 		return Objects.hash(cedula);
 	}
@@ -87,9 +90,16 @@ public class Cliente extends Persona{
 		Cliente other = (Cliente) obj;
 		return Objects.equals(cedula, other.cedula);
 	}
-	
-	public boolean buscarMascotaRepetida(Mascota mascota) {
-		return listaMascotas.stream()
-				.anyMatch(x -> x.getIdentificacion().equals(mascota.getIdentificacion()));
+
+	/*
+     ///////////////////////////////////////////
+     */
+	public boolean buscarMascotaRepetida(Mascota mascotaNueva) {
+		for (Mascota mascota : listaMascotas) {
+			if(mascota.getIdMascota().equals(mascotaNueva.getIdMascota())) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

@@ -2,13 +2,15 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,7 +18,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="682.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0" prefWidth="682.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.pr3.controllers.VentanaMenuController">
   <tabs>
       <Tab text="Registro Clientes">
          <content>
@@ -57,9 +59,9 @@
                               <TextField fx:id="txtFieldCorreoCliente" layoutX="113.0" layoutY="303.0" prefHeight="25.0" prefWidth="197.0" promptText="Correo" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
                               <TextField fx:id="txtFieldDireccionCliente" layoutX="115.0" layoutY="222.0" prefHeight="25.0" prefWidth="197.0" promptText="Dirección" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
                               <TextField fx:id="txtFieldCedulaCliente" layoutX="114.0" layoutY="380.0" prefHeight="25.0" prefWidth="197.0" promptText="Cédula" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-                              <Button fx:id="btnRegistrarCliente" layoutX="168.0" layoutY="436.0" mnemonicParsing="false" onAction="#registrarCliente" prefHeight="30.0" prefWidth="92.0" style="-fx-background-radius: 50; -fx-background-color: #0598ff;" text="Registrar">
+                              <Button fx:id="btnRegistrarCliente" layoutX="146.0" layoutY="436.0" mnemonicParsing="false" onAction="#registrarCliente" prefHeight="30.0" prefWidth="135.0" style="-fx-background-radius: 50; -fx-background-color: #0598ff;" text="Registrar Cliente">
                                  <font>
-                                    <Font name="System Bold" size="14.0" />
+                                    <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
                               <TextField fx:id="txtFieldTelefonoCliente" layoutX="115.0" layoutY="136.0" prefHeight="25.0" prefWidth="197.0" promptText="Telefono" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
@@ -83,16 +85,16 @@
                               <Label layoutX="193.0" layoutY="14.0" text="Nombre" />
                               <Label layoutX="201.0" layoutY="89.0" text="Edad" />
                               <Label layoutX="203.0" layoutY="212.0" text="Sexo" />
-                              <Label layoutX="204.0" layoutY="276.0" text="Tipo" />
-                              <Label layoutX="202.0" layoutY="151.0" text="Raza" />
+                              <Label layoutX="202.0" layoutY="157.0" text="Tipo" />
+                              <Label layoutX="201.0" layoutY="292.0" text="Raza" />
                               <Label layoutX="169.0" layoutY="359.0" text="Cédula del dueño" />
                               <TextField fx:id="txtFieldNombreMascota" layoutX="140.0" layoutY="42.0" promptText="Nombre" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
                               <TextField fx:id="txtFieldEdadMascota" layoutX="140.0" layoutY="115.0" promptText="Edad" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-                              <TextField fx:id="txtFieldRazaMascota" layoutX="141.0" layoutY="177.0" promptText="Raza" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                              <TextField fx:id="txtFieldRazaMascota" layoutX="141.0" layoutY="310.0" promptText="Raza" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
                               <TextField fx:id="txtFieldCedulaMascota" layoutX="141.0" layoutY="392.0" promptText="Cédula" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
                               <ComboBox fx:id="ComboBoxSexoMascota" layoutX="141.0" layoutY="236.0" prefWidth="150.0" promptText="Sexo" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-                              <ComboBox fx:id="ComboBoxTipoMascota" layoutX="141.0" layoutY="313.0" prefWidth="150.0" promptText="Tipo de mascota" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-                              <Button fx:id="btnRegistrarMascota" layoutX="148.0" layoutY="433.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="135.0" style="-fx-background-radius: 60; -fx-background-color: #0598ff;" text="Registrar Mascota">
+                              <ComboBox fx:id="ComboBoxTipoMascota" layoutX="141.0" layoutY="175.0" prefWidth="150.0" promptText="Tipo de mascota" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                              <Button fx:id="btnRegistrarMascota" layoutX="148.0" layoutY="433.0" mnemonicParsing="false" onAction="#regitrarMascota" prefHeight="31.0" prefWidth="135.0" style="-fx-background-radius: 60; -fx-background-color: #0598ff;" text="Registrar Mascota">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -124,12 +126,33 @@
          <content>
             <AnchorPane prefHeight="487.0" prefWidth="677.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f5f5f5" height="450.0" layoutX="22.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="645.0" />
-                  <TextArea fx:id="txtAreaDiagnosticoCita" layoutX="422.0" layoutY="73.0" prefHeight="165.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-                  <Label layoutX="491.0" layoutY="39.0" text="Diagnostico" />
-                  <ComboBox layoutX="78.0" layoutY="396.0" prefWidth="150.0" />
-                  <TextArea fx:id="txtAreaTratamientoCita" layoutX="423.0" layoutY="279.0" prefHeight="165.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-                  <Label layoutX="490.0" layoutY="251.0" text="Tratamiento" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f5f5f5" height="450.0" layoutX="23.0" layoutY="18.0" stroke="BLACK" strokeType="INSIDE" width="645.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f5f5f5" height="82.0" layoutX="53.0" layoutY="39.0" stroke="BLACK" strokeType="INSIDE" width="213.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f5f5f5" height="193.0" layoutX="282.0" layoutY="220.0" stroke="BLACK" strokeType="INSIDE" width="365.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f5f5f5" height="169.0" layoutX="55.0" layoutY="131.0" stroke="BLACK" strokeType="INSIDE" width="213.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f5f5f5" height="185.0" layoutX="281.0" layoutY="36.0" stroke="BLACK" strokeType="INSIDE" width="367.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f5f5f5" height="145.0" layoutX="55.0" layoutY="310.0" stroke="BLACK" strokeType="INSIDE" width="213.0" />
+                  <TextArea fx:id="txtAreaDiagnosticoCita" layoutX="300.0" layoutY="73.0" prefHeight="119.0" prefWidth="322.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                  <Label layoutX="429.0" layoutY="47.0" text="Diagnostico" />
+                  <TextArea fx:id="txtAreaTratamientoCita" layoutX="303.0" layoutY="266.0" prefHeight="124.0" prefWidth="324.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                  <Label layoutX="428.0" layoutY="234.0" text="Tratamiento" />
+                  <DatePicker fx:id="DatePickerFechaCita" layoutX="78.0" layoutY="349.0" />
+                  <Label layoutX="90.0" layoutY="319.0" text="Seleccione la Fecha de la cita" />
+                  <ComboBox fx:id="comboBoxSelVet" layoutX="71.0" layoutY="73.0" prefHeight="27.0" prefWidth="177.0" promptText="Seleccione el Veterinario" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                  <ComboBox fx:id="comboBoxSelMascotaICita" layoutX="79.0" layoutY="246.0" prefHeight="27.0" prefWidth="175.0" promptText="Seleccione la Mascota" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                  <Label layoutX="110.0" layoutY="220.0" text="Macotas del Dueño" />
+                  <Spinner fx:id="SpinnerHoraCita" layoutX="90.0" layoutY="405.0" prefHeight="27.0" prefWidth="59.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                  <Spinner fx:id="SpinnerMinutosCita" layoutX="175.0" layoutY="405.0" prefHeight="27.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                  <Label layoutX="102.0" layoutY="383.0" text="Hora" />
+                  <Label layoutX="180.0" layoutY="383.0" text="Minuto" />
+                  <TextField fx:id="txtFieldCedulaBuscarMascotasCita" layoutX="92.0" layoutY="167.0" onAction="#llenarComboMascotasDueño" promptText="Cédula" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                  <Label layoutX="113.0" layoutY="138.0" text="Cédula del Dueño" />
+                  <Label layoutX="131.0" layoutY="47.0" text="Veterinario" />
+                  <Button fx:id="btnAgendarCita" layoutX="393.0" layoutY="423.0" mnemonicParsing="false" onAction="#agendarCita" prefHeight="31.0" prefWidth="135.0" style="-fx-background-radius: 60; -fx-background-color: #0598ff;" text="Agendar Cita">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
          </content>
@@ -138,16 +161,29 @@
       <content>
             <AnchorPane>
                <children>
-                  <TreeTableView layoutX="45.0" layoutY="226.0" prefHeight="200.0" prefWidth="607.0">
-                    <columns>
-                      <TreeTableColumn prefWidth="75.0" text="Cédula" />
-                      <TreeTableColumn prefWidth="75.0" text="Nombre" />
-                        <TreeTableColumn prefWidth="75.0" text="Nombre" />
-                        <TreeTableColumn prefWidth="75.0" text="Nombre" />
-                    </columns>
-                  </TreeTableView>
-                  <Label layoutX="91.0" layoutY="67.0" text="Label" />
-                  <Button layoutX="262.0" layoutY="436.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="158.0" text="Actualizar datos del cliente" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f5f5f5" height="162.0" layoutX="45.0" layoutY="17.0" stroke="BLACK" strokeType="INSIDE" width="608.0" />
+                  <Label layoutX="58.0" layoutY="31.0" text="Nombre" />
+                  <Label layoutX="57.0" layoutY="87.0" text="Teléfono" />
+                  <Label layoutX="386.0" layoutY="31.0" text="Correo" />
+                  <Label layoutX="386.0" layoutY="87.0" text="Dirección" />
+                  <TextField fx:id="txtFieldNombreActCliente" layoutX="143.0" layoutY="26.0" promptText="Nombre" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                  <TextField fx:id="txtFieldTelefonoActCliente" layoutX="143.0" layoutY="82.0" promptText="Teléfono" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                  <TextField fx:id="txtFieldCorreoActCliente" layoutX="451.0" layoutY="26.0" promptText="Correo" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                  <TextField fx:id="txtFieldDireccionActCliente" layoutX="451.0" layoutY="82.0" promptText="Dirección" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                  <Button fx:id="btnActDatosCliente" layoutX="281.0" layoutY="131.0" mnemonicParsing="false" onAction="#actualizarDatosCliente" prefHeight="31.0" prefWidth="135.0" style="-fx-background-radius: 60; -fx-background-color: #0598ff;" text="Actualizar Datos">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <TableView fx:id="tableViewVerClientes" layoutX="44.0" layoutY="212.0" prefHeight="223.0" prefWidth="612.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;">
+                     <columns>
+                        <TableColumn fx:id="columnaNombre" prefWidth="110.6666488647461" text="Nombre" />
+                        <TableColumn fx:id="columnaTelefono" prefWidth="91.33334350585938" text="Telefono" />
+                        <TableColumn fx:id="columnaCorreo" prefWidth="152.66664123535156" text="Correo" />
+                        <TableColumn fx:id="columnaCedula" prefWidth="84.66668701171875" text="Cedula" />
+                        <TableColumn fx:id="columnaDireccion" prefWidth="174.66665649414062" text="Direccion" />
+                     </columns>
+                  </TableView>
                </children>
             </AnchorPane>
       </content>
@@ -156,72 +192,84 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="471.0" prefWidth="682.0">
                <children>
-                  <TreeTableView layoutX="36.0" layoutY="234.0" prefHeight="209.0" prefWidth="603.0" style="-fx-border-color: #0598ff; -fx-background-color: transparent;">
-                    <columns>
-                      <TreeTableColumn prefWidth="118.00002670288086" style="-fx-background-color: transparent;" text="ID Cita" />
-                      <TreeTableColumn prefWidth="150.6666717529297" text="Veterinario" />
-                        <TreeTableColumn prefWidth="144.0" text="Mascota" />
-                        <TreeTableColumn prefWidth="191.99996948242188" text="Fecha" />
-                    </columns>
-                  </TreeTableView>
-                  <Label layoutX="94.0" layoutY="33.0" text="Actualizar Cita" />
-                  <Label layoutX="56.0" layoutY="96.0" text="Ingrese" />
+                  <Label layoutX="75.0" layoutY="24.0" text="Seleccione una cita en la tabla de abajo para actualizar el estado">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="112.0" layoutY="92.0" text="Estado" />
+                  <ComboBox fx:id="ComboBoxCambiarEstadoCita" layoutX="216.0" layoutY="87.0" prefWidth="150.0" promptText="Estado" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                  <Button fx:id="btnActualizarEstado" layoutX="409.0" layoutY="85.0" mnemonicParsing="false" onAction="#actualizarEstado" prefHeight="31.0" prefWidth="135.0" style="-fx-background-radius: 60; -fx-background-color: #0598ff;" text="Actualizar Estado">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <TableView fx:id="tableViewCitas" layoutX="22.0" layoutY="168.0" prefHeight="278.0" prefWidth="643.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;">
+                     <columns>
+                        <TableColumn fx:id="columnIDCita" prefWidth="57.33334732055664" text="ID Cita" />
+                        <TableColumn fx:id="columnFechaCita" prefWidth="111.3333740234375" text="Fecha" />
+                        <TableColumn fx:id="columnEstadoCita" prefWidth="113.33328247070312" text="Estado" />
+                        <TableColumn fx:id="columnVeterinarioCita" prefWidth="141.99999237060547" text="Veterinario" />
+                        <TableColumn fx:id="columnMascotaCita" prefWidth="115.33332824707031" text="Mascota" />
+                        <TableColumn fx:id="columnFactura" prefWidth="103.3333740234375" text="Factura" />
+                     </columns>
+                  </TableView>
                </children>
             </AnchorPane>
         </content>
       </Tab>
-      <Tab text="Actualizar Datos del Cliente">
-         <content>
-            <AnchorPane prefHeight="500.0" prefWidth="700.0">
+      <Tab text="Historial Clinico de Mascota">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0">
-                     <left>
-                        <AnchorPane prefHeight="400.0" prefWidth="288.0" style="-fx-background-color: #0598ff;" BorderPane.alignment="CENTER">
-                           <children>
-                              <ImageView fitHeight="274.0" fitWidth="176.0" layoutX="59.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../../imagenes/imagi.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="61.0" layoutY="60.0" text="Patitas Peludas" textFill="#ffffffee">
-                                 <font>
-                                    <Font size="25.0" />
-                                 </font>
-                              </Label>
-                              <Label alignment="TOP_CENTER" layoutX="76.0" layoutY="122.0" prefHeight="77.0" prefWidth="141.0" text="Actualizacion de Datos" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                     </left>
-                     <center>
-                        <AnchorPane prefHeight="500.0" prefWidth="415.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#f5f5f5" height="463.0" layoutX="17.0" layoutY="13.0" smooth="false" stroke="BLACK" strokeType="INSIDE" width="367.0" />
-                              <TextField fx:id="txtNombreClienteAct" layoutX="114.0" layoutY="57.0" prefHeight="27.0" prefWidth="195.0" promptText="Nombre" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-                              <Label layoutX="192.0" layoutY="27.0" text="Nombre" />
-                              <Label layoutX="189.0" layoutY="99.0" prefHeight="18.0" prefWidth="50.0" text="Telefono" />
-                              <Label layoutX="187.0" layoutY="181.0" text="Dirección" />
-                              <Label layoutX="196.0" layoutY="274.0" text="Correo" />
-                              <Label layoutX="194.0" layoutY="347.0" text="Cédula" />
-                              <TextField fx:id="txtCorreoClienteAct" layoutX="113.0" layoutY="303.0" prefHeight="25.0" prefWidth="197.0" promptText="Correo" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-                              <TextField fx:id="txtDireccionClienteAct" layoutX="115.0" layoutY="222.0" prefHeight="25.0" prefWidth="197.0" promptText="Dirección" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-                              <TextField fx:id="txtCedulaClienteAct" layoutX="114.0" layoutY="380.0" prefHeight="25.0" prefWidth="197.0" promptText="Cédula" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-                              <Button fx:id="btnActCliente" layoutX="168.0" layoutY="436.0" mnemonicParsing="false" onAction="#ActualizarDatosCliente" prefHeight="30.0" prefWidth="92.0" style="-fx-background-radius: 50; -fx-background-color: #0598ff;" text="Registrar">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Button>
-                              <TextField fx:id="txtTelefonoClienteAct" layoutX="115.0" layoutY="136.0" prefHeight="25.0" prefWidth="197.0" promptText="Telefono" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-                           </children>
-                        </AnchorPane>
-                     </center>
-                  </BorderPane>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f5f5f5" height="210.0" layoutX="34.0" layoutY="28.0" stroke="BLACK" strokeType="INSIDE" width="213.0" />
+                  <ComboBox fx:id="comboBoxSelMascotaHistorial" layoutX="62.0" layoutY="151.0" prefHeight="27.0" prefWidth="175.0" promptText="Seleccione la Mascota" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                  <Label layoutX="85.0" layoutY="126.0" text="Macotas del Dueño" />
+                  <TextField fx:id="txtFieldCedulaDueñoHistorial" layoutX="66.0" layoutY="75.0" promptText="Cédula" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                  <Label layoutX="93.0" layoutY="42.0" text="Cédula del Dueño" />
+                  <Button fx:id="btnFiltrarMascotaHistorial" layoutX="73.0" layoutY="194.0" mnemonicParsing="false" onAction="#verHistorialMascota" prefHeight="31.0" prefWidth="135.0" style="-fx-background-radius: 60; -fx-background-color: #0598ff;" text="Ver Historial">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <TextArea fx:id="txtAreaDiagnosticoHistorial" layoutX="34.0" layoutY="288.0" prefHeight="167.0" prefWidth="278.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                  <TextArea fx:id="txtAreaTratamientoHistorial" layoutX="361.0" layoutY="288.0" prefHeight="167.0" prefWidth="278.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
+                  <Label layoutX="141.0" layoutY="260.0" text="Diagnóstico" />
+                  <Label layoutX="468.0" layoutY="260.0" text="Tratamiento" />
+                  <TableView fx:id="tableViewHistorialMascota" layoutX="293.0" layoutY="23.0" prefHeight="223.0" prefWidth="371.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;">
+                     <columns>
+                        <TableColumn fx:id="columnFechaHistorialMascota" prefWidth="369.99998982747394" text="Fecha" />
+                     </columns>
+                  </TableView>
                </children>
             </AnchorPane>
-         </content>
+        </content>
+      </Tab>
+      <Tab text="Buscar Citas Por Fecha">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="66.0" layoutY="49.0" text="Fecha Inicio" />
+                  <Label layoutX="361.0" layoutY="49.0" text="Fecha Final" />
+                  <DatePicker fx:id="DatePickerFechaFinal" layoutX="431.0" layoutY="45.0" />
+                  <DatePicker fx:id="DatePickerFechaInicio" layoutX="145.0" layoutY="45.0" />
+                  <Button fx:id="btnFiltrarHistorial2" layoutX="273.0" layoutY="101.0" mnemonicParsing="false" onAction="#filtrarFechaCitas" prefHeight="31.0" prefWidth="135.0" style="-fx-background-radius: 60; -fx-background-color: #0598ff;" text="Filtrar">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <TableView fx:id="tableViewFiltroFecha" layoutX="35.0" layoutY="181.0" prefHeight="259.0" prefWidth="612.0" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;">
+                     <columns>
+                        <TableColumn fx:id="columnFechaFiltro" prefWidth="84.00003433227539" text="Fecha" />
+                        <TableColumn fx:id="columnIDCitaFiltro" prefWidth="129.33329010009766" text="ID Cita" />
+                        <TableColumn fx:id="columnVeterinarioFiltro" prefWidth="128.00006103515625" text="Veterinario" />
+                        <TableColumn fx:id="columnMascotaFiltro" prefWidth="151.33328247070312" text="Mascota" />
+                        <TableColumn fx:id="columnEstadoFiltro" prefWidth="120.0" text="Estado" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </content>
       </Tab>
   </tabs>
 </TabPane>
